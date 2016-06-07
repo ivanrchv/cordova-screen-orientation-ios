@@ -32,12 +32,13 @@ import android.content.pm.ActivityInfo;
 import android.util.Log;
 
 import android.view.View;
+import android.view.OrientationEventListener;
 import android.provider.Settings.System;
 import org.apache.cordova.PluginResult;
 
 public class IRRDeviceOrientation extends CordovaPlugin {
 
-    private static final String TAG = "YoikScreenOrientation";
+    private static final String TAG = "IRRDeviceOrientation";
 
     /**
      * Screen Orientation Constants
