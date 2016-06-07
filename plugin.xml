@@ -42,8 +42,6 @@
     </platform>
 
     <platform name="android">
-        <source-file src="src/android/IRRDeviceOrientation.java" target-dir="src/nib/plugins/deviceorientation/" />
-
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="IRRDeviceOrientation">
                 <param name="android-package" value="nib.plugins.deviceorientation" />
@@ -52,6 +50,7 @@
         <js-module src="www/deviceorientation.android.js" name="deviceorientation.android">
             <merges target="cordova.plugins.deviceorientation" />
         </js-module>
+        <source-file src="src/android/IRRDeviceOrientation.java" target-dir="src/nib/plugins/deviceorientation/" />
     </platform>
 
 </plugin>

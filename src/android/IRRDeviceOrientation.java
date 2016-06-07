@@ -72,6 +72,8 @@ public class IRRDeviceOrientation extends CordovaPlugin {
         // Route the Action
         if (action.equals("registerNotification")) {
             return registerNotification(callbackContext);
+        } else if (action.equals("unregisterNotification")) {
+            return unregisterNotification();
         } else if (action.equals("checkRotationLock")) {
             return checkRotationLock(callbackContext);
         }
@@ -97,6 +99,12 @@ public class IRRDeviceOrientation extends CordovaPlugin {
     private boolean registerNotification(CallbackContext callbackContext) {
         orientationListener.enable();
         listeners.add(callbackContext);
+        return true;
+    }
+
+    private boolean unregisterNotification() {
+        orientationListener.disable();
+        listeners.clear();
         return true;
     }
 
