@@ -128,6 +128,6 @@ public class IRRDeviceOrientation extends CordovaPlugin {
                         lastRotatedTo = newRotateTo;
                     }
                 }
-        }
+        };
     }
 }
