@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-device-orientation",
+  "name": "cordova-device-orientation-listener",
   "version": "1.4.2",
   "description": "Adds Device object to iOS with listeners for device orientation change",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "git+https://github.com/ivanrchv/cordova-screen-orientation-ios.git"
   },
   "cordova": {
-    "id": "cordova-plugin-device-orientation",
+    "id": "cordova-device-orientation-listener",
     "platforms": [
       "ios"
     ]

@@ -17,7 +17,7 @@
 -->
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="cordova-device-orientation"
+    id="cordova-device-orientation-listener"
     version="1.0.0">
 
     <name>Device Orientation</name>
@@ -29,7 +29,7 @@
     </engines>
 
     <js-module src="www/deviceorientation.js" name="deviceorientation">
-        <clobbers target="cordova.plugins.deviceorientation" />
+        <clobbers target="cordova.plugins.deviceorientation.listener" />
     </js-module>
 
     <platform name="ios">
@@ -39,7 +39,7 @@
             </feature>
         </config-file>
         <js-module src="www/deviceorientation.js" name="deviceorientation.ios">
-            <merges target="cordova.plugins.deviceorientation" />
+            <merges target="cordova.plugins.deviceorientation.listener" />
         </js-module>
         <header-file src="src/ios/IRRDeviceOrientation.h" />
         <source-file src="src/ios/IRRDeviceOrientation.m" />
