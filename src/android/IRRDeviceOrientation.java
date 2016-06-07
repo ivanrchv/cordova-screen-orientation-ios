@@ -30,6 +30,7 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.util.Log;
+import java.util.HashSet;
 
 import android.view.View;
 import android.view.OrientationEventListener;
@@ -37,6 +38,7 @@ import android.provider.Settings;
 import android.provider.Settings.System;
 import android.hardware.SensorManager;
 import org.apache.cordova.PluginResult;
+
 
 public class IRRDeviceOrientation extends CordovaPlugin {
 
@@ -127,7 +129,6 @@ public class IRRDeviceOrientation extends CordovaPlugin {
                     }
 
                     if(newRotateTo != lastRotatedTo) {
-                        rotateButtons(lastRotatedTo, newRotateTo);
                         lastRotatedTo = newRotateTo;
                     }
                 }
