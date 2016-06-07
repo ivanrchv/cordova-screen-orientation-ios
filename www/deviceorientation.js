@@ -23,11 +23,14 @@ var exec = require('cordova/exec');
 var deviceOrientation = typeof deviceOrientation != 'undefined' ? deviceOrientation : {};
 
 var _dvcOrientation = {
+    isRegisteredWithIOS: false,
     listeners: [],
     registerWithIOS: function () {
+        this.isRegisteredWithIOS = true;
         exec(null, null, 'IRRDeviceOrientation', 'registerNotification', [this.handleDeviceOrientation]);
     },
     deregisterWithIOS: function () {
+        this.isRegisteredWithIOS = false;
         exec(null, null, 'IRRDeviceOrientation', 'unregisterNotification', [this.handleDeviceOrientation]);
     },
     handleDeviceOrientation: function (orientation) {
@@ -40,6 +43,9 @@ var _dvcOrientation = {
 };
 
 deviceOrientation.addEventListener = function (callback) {
+    if (!_dvcOrientation.isRegisteredWithIOS) {
+        _dvcOrientation.registerWithIOS();
+    }
     _dvcOrientation.listeners.push(callback);
 };
 
@@ -47,6 +53,10 @@ deviceOrientation.removeEventListener = function (listenerToFilter) {
     _dvcOrientation.listeners = _dvcOrientation.listeners.filter(function (listener) {
         return listener !== listenerToFilter;
     });
+
+    if (_dvcOrientation.listeners.length == 0) {
+        _dvcOrientation.deregisterWithIOS();
+    }
 };
 
 
