@@ -55,6 +55,7 @@ public class IRRDeviceOrientation extends CordovaPlugin {
     public static final int REVERSE_PORTRAIT = 180;
     public static final int REVERSE_LANDSCAPE = 90;
     private int lastRotatedTo = 0;
+    private OrientationEventListener orientationListener;
 
     private HashSet listeners = new HashSet();
 
@@ -89,38 +90,44 @@ public class IRRDeviceOrientation extends CordovaPlugin {
     }
 
     private boolean registerNotification(CallbackContext callbackContext) {
+        orientationListener.enable();
         listeners.add(callbackContext);
         return true;
     }
 
-
-
     @Override
-    public void onOrientationChanged(int orientation) {
-        int newRotateTo = lastRotatedTo;
-        if(orientation >= 360 + PORTRAIT - THRESHOLD && orientation < 360 || orientation >= 0 && orientation <= PORTRAIT + THRESHOLD) {
-            newRotateTo = 0;
-            PluginResult result = new PluginResult(PluginResult.Status.OK, PORTRAIT_PRIMARY);
-            result.setKeepCallback(true);
-        } else if(orientation >= LANDSCAPE - THRESHOLD && orientation <= LANDSCAPE + THRESHOLD) {
-            newRotateTo = 90;
-            luginResult result = new PluginResult(PluginResult.Status.OK, LANDSCAPE_PRIMARY);
-            result.setKeepCallback(true);
-        }
-        else if(orientation >= REVERSE_PORTRAIT - THRESHOLD && orientation <= REVERSE_PORTRAIT + THRESHOLD) {
-            newRotateTo = 180;
-            luginResult result = new PluginResult(PluginResult.Status.OK, PORTRAIT_SECONDARY);
-            result.setKeepCallback(true);
-        }
-        else if(orientation >= REVERSE_LANDSCAPE - THRESHOLD && orientation <= REVERSE_LANDSCAPE + THRESHOLD) {
-            newRotateTo = -90;
-            luginResult result = new PluginResult(PluginResult.Status.OK, LANDSCAPE_SECONDARY);
-            result.setKeepCallback(true);
-        }
+    protected void pluginInitialize() {
+        Activity main = cordova.getActivity();
+        orientationListener = new OrientationEventListener(main, SensorManager.SENSOR_DELAY_NORMAL) {
 
-        if(newRotateTo != lastRotatedTo) {
-            rotateButtons(lastRotatedTo, newRotateTo);
-            lastRotatedTo = newRotateTo;
+        @Override
+        public void onOrientationChanged(int orientation) {
+                    int newRotateTo = lastRotatedTo;
+                    if(orientation >= 360 + PORTRAIT - THRESHOLD && orientation < 360 || orientation >= 0 && orientation <= PORTRAIT + THRESHOLD) {
+                        newRotateTo = 0;
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, PORTRAIT_PRIMARY);
+                        result.setKeepCallback(true);
+                    } else if(orientation >= LANDSCAPE - THRESHOLD && orientation <= LANDSCAPE + THRESHOLD) {
+                        newRotateTo = 90;
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, LANDSCAPE_PRIMARY);
+                        result.setKeepCallback(true);
+                    }
+                    else if(orientation >= REVERSE_PORTRAIT - THRESHOLD && orientation <= REVERSE_PORTRAIT + THRESHOLD) {
+                        newRotateTo = 180;
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, PORTRAIT_SECONDARY);
+                        result.setKeepCallback(true);
+                    }
+                    else if(orientation >= REVERSE_LANDSCAPE - THRESHOLD && orientation <= REVERSE_LANDSCAPE + THRESHOLD) {
+                        newRotateTo = -90;
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, LANDSCAPE_SECONDARY);
+                        result.setKeepCallback(true);
+                    }
+
+                    if(newRotateTo != lastRotatedTo) {
+                        rotateButtons(lastRotatedTo, newRotateTo);
+                        lastRotatedTo = newRotateTo;
+                    }
+                }
         }
     }
 }
