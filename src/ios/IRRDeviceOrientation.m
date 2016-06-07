@@ -32,6 +32,7 @@
 -(void)registerNotification:(CDVInvokedUrlCommand *)command
 {
     self.callbackId = command.callbackId;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
@@ -67,6 +68,7 @@
         }
             break;
     }
+    pluginResult.keepCallback = @(YES);
     [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
 }
 

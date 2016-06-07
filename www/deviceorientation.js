@@ -1,4 +1,4 @@
-/*
+cordova.define("cordova-device-orientation-listener.deviceorientation.ios", function(require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -27,17 +27,17 @@ var _dvcOrientation = {
     listeners: [],
     registerWithIOS: function () {
         this.isRegisteredWithIOS = true;
-        exec(null, null, 'IRRDeviceOrientation', 'registerNotification', [this.handleDeviceOrientation]);
+        exec(this.handleDeviceOrientation, null, 'IRRDeviceOrientation', 'registerNotification', []);
     },
     deregisterWithIOS: function () {
         this.isRegisteredWithIOS = false;
-        exec(null, null, 'IRRDeviceOrientation', 'unregisterNotification', [this.handleDeviceOrientation]);
+        exec(null, null, 'IRRDeviceOrientation', 'unregisterNotification', []);
     },
     handleDeviceOrientation: function (orientation) {
         deviceOrientation.currentOrientation = orientation;
 
-        for (var i = 0; i < this.listeners.length; i++) {
-            this.listeners[i](orientation);
+        for (var i = 0; i < _dvcOrientation.listeners.length; i++) {
+            _dvcOrientation.listeners[i](orientation);
         }
     }
 };
@@ -62,3 +62,4 @@ deviceOrientation.removeEventListener = function (listenerToFilter) {
 
 
 module.exports = deviceOrientation;
+});
