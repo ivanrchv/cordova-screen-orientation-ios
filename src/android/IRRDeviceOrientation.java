@@ -31,7 +31,7 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.util.Log;
 
-import android.view;
+import android.view.View;
 import android.provider.Settings.System;
 import org.apache.cordova.PluginResult;
 
