@@ -9,7 +9,8 @@
   "cordova": {
     "id": "cordova-device-orientation-listener",
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   },
   "keywords": [
