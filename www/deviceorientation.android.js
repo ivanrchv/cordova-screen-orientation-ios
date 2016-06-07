@@ -1,4 +1,4 @@
-cordova.define("cordova-device-orientation-listener.deviceorientation.android", function(require, exports, module) { /*
+ /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,48 +19,48 @@ cordova.define("cordova-device-orientation-listener.deviceorientation.android", 
  *
  */
 
-    var exec = require('cordova/exec');
-    var deviceOrientation = typeof deviceOrientation != 'undefined' ? deviceOrientation : {};
+var exec = require('cordova/exec');
+var deviceOrientation = typeof deviceOrientation != 'undefined' ? deviceOrientation : {};
 
-    var _dvcOrientation = {
-        isRegisteredWithAndroid: false,
-        listeners: [],
-        registerWithAndroid: function () {
-            this.isRegisteredWithAndroid = true;
-            exec(this.handleDeviceOrientation, null, 'IRRDeviceOrientation', 'registerNotification', []);
-        },
-        deregisterWithAndroid: function () {
-            this.isRegisteredWithAndroid = false;
-            exec(null, null, 'IRRDeviceOrientation', 'unregisterNotification', []);
-        },
-        handleDeviceOrientation: function (orientation) {
-            deviceOrientation.currentOrientation = orientation;
+var _dvcOrientation = {
+    isRegisteredWithAndroid: false,
+    listeners: [],
+    registerWithAndroid: function () {
+        this.isRegisteredWithAndroid = true;
+        exec(this.handleDeviceOrientation, null, 'IRRDeviceOrientation', 'registerNotification', []);
+    },
+    deregisterWithAndroid: function () {
+        this.isRegisteredWithAndroid = false;
+        exec(null, null, 'IRRDeviceOrientation', 'unregisterNotification', []);
+    },
+    handleDeviceOrientation: function (orientation) {
+        deviceOrientation.currentOrientation = orientation;
 
-            for (var i = 0; i < _dvcOrientation.listeners.length; i++) {
-                _dvcOrientation.listeners[i](orientation);
-            }
+        for (var i = 0; i < _dvcOrientation.listeners.length; i++) {
+            _dvcOrientation.listeners[i](orientation);
         }
-    };
+    }
+};
 
-    deviceOrientation.addEventListener = function (callback) {
-        if (!_dvcOrientation.isRegisteredWithAndroid) {
-            _dvcOrientation.registerWithAndroid();
-        }
-        _dvcOrientation.listeners.push(callback);
-    };
+deviceOrientation.addEventListener = function (callback) {
+    if (!_dvcOrientation.isRegisteredWithAndroid) {
+        _dvcOrientation.registerWithAndroid();
+    }
+    _dvcOrientation.listeners.push(callback);
+};
 
-    deviceOrientation.removeEventListener = function (listenerToFilter) {
-        _dvcOrientation.listeners = _dvcOrientation.listeners.filter(function (listener) {
-            return listener !== listenerToFilter;
-        });
+deviceOrientation.removeEventListener = function (listenerToFilter) {
+    _dvcOrientation.listeners = _dvcOrientation.listeners.filter(function (listener) {
+        return listener !== listenerToFilter;
+    });
 
-        if (_dvcOrientation.listeners.length == 0) {
-            _dvcOrientation.deregisterWithAndroid();
-        }
-    };
+    if (_dvcOrientation.listeners.length == 0) {
+        _dvcOrientation.deregisterWithAndroid();
+    }
+};
 
 
 
-    module.exports = deviceOrientation;
-});
+module.exports = deviceOrientation;
+
 
