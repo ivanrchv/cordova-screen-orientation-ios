@@ -64,8 +64,8 @@ public class IRRDeviceOrientation extends CordovaPlugin {
         Log.d(TAG, "execute action: " + action);
 
         // Route the Action
-        if (action.equals("screenOrientation")) {
-            return routeScreenOrientation(args, callbackContext);
+        if (action.equals("registerNotification")) {
+            return registerNotification(callbackContext);
         } else if (action.equals("checkRotationLock")) {
             return checkRotationLock(callbackContext);
         }
@@ -90,6 +90,7 @@ public class IRRDeviceOrientation extends CordovaPlugin {
 
     private boolean registerNotification(CallbackContext callbackContext) {
         listeners.add(callbackContext);
+        return true;
     }
 
 
@@ -97,26 +98,26 @@ public class IRRDeviceOrientation extends CordovaPlugin {
     @Override
     public void onOrientationChanged(int orientation) {
         int newRotateTo = lastRotatedTo;
-        if(orientation >= 360 + PORTRAIT - THRESHOLD && orientation < 360 ||
-                orientation >= 0 && orientation <= PORTRAIT + THRESHOLD)
+        if(orientation >= 360 + PORTRAIT - THRESHOLD && orientation < 360 || orientation >= 0 && orientation <= PORTRAIT + THRESHOLD) {
             newRotateTo = 0;
             PluginResult result = new PluginResult(PluginResult.Status.OK, PORTRAIT_PRIMARY);
             result.setKeepCallback(true);
-        else if(orientation >= LANDSCAPE - THRESHOLD && orientation <= LANDSCAPE + THRESHOLD)
-
+        } else if(orientation >= LANDSCAPE - THRESHOLD && orientation <= LANDSCAPE + THRESHOLD) {
             newRotateTo = 90;
             luginResult result = new PluginResult(PluginResult.Status.OK, LANDSCAPE_PRIMARY);
             result.setKeepCallback(true);
-        else if(orientation >= REVERSE_PORTRAIT - THRESHOLD && orientation <= REVERSE_PORTRAIT + THRESHOLD)
-
+        }
+        else if(orientation >= REVERSE_PORTRAIT - THRESHOLD && orientation <= REVERSE_PORTRAIT + THRESHOLD) {
             newRotateTo = 180;
             luginResult result = new PluginResult(PluginResult.Status.OK, PORTRAIT_SECONDARY);
             result.setKeepCallback(true);
-        else if(orientation >= REVERSE_LANDSCAPE - THRESHOLD && orientation <= REVERSE_LANDSCAPE + THRESHOLD)
-
+        }
+        else if(orientation >= REVERSE_LANDSCAPE - THRESHOLD && orientation <= REVERSE_LANDSCAPE + THRESHOLD) {
             newRotateTo = -90;
             luginResult result = new PluginResult(PluginResult.Status.OK, LANDSCAPE_SECONDARY);
             result.setKeepCallback(true);
+        }
+
         if(newRotateTo != lastRotatedTo) {
             rotateButtons(lastRotatedTo, newRotateTo);
             lastRotatedTo = newRotateTo;
