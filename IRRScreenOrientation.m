@@ -28,27 +28,27 @@
 }
 
 - (void)orientationChanged:(NSNotification *)notification{
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
     CDVPluginResult* pluginResult = nil;
     
     switch (orientation) {
-        case UIInterfaceOrientationPortrait: {
+        case UIDeviceOrientationPortrait: {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"portrait-primary"];
         }
             break;
-        case UIInterfaceOrientationPortraitUpsideDown: {
+        case UIDeviceOrientationPortraitUpsideDown: {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"portrait-secondary"];
         }
             break;
-        case UIInterfaceOrientationLandscapeLeft: {
+        case UIDeviceOrientationLandscapeLeft: {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"landscape-primary"];
         }
             break;
-        case UIInterfaceOrientationLandscapeRight: {
+        case UIDeviceOrientationLandscapeRight: {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"landscape-secondary"];
         }
             break;
-        case UIInterfaceOrientationUnknown: {
+        default: {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"unknown"];
         }
             break;
