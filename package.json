@@ -1,0 +1,29 @@
+{
+  "name": "cordova-plugin-device-orientation",
+  "version": "1.4.2",
+  "description": "Adds Device object to iOS with listeners for device orientation change",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanrchv/cordova-screen-orientation-ios.git"
+  },
+  "cordova": {
+    "id": "cordova-plugin-device-orientation",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "device",
+    "ecosystem:cordova",
+    "orientation",
+    "portrait",
+    "landscape"
+  ],
+  "author": "Ivan Raychev",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ivanrchv/cordova-screen-orientation-ios/issues"
+  },
+  "homepage": "https://github.com/ivanrchv/cordova-screen-orientation-ios#readme"
+}

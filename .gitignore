@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Standart Ignore template
+!.gitkeep
+node_modules/
+bower_components/
+.DS_Store
+.idea

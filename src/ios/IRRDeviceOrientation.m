@@ -1,19 +1,19 @@
 //
-//  IRRScreenOrientation.m
+//  IRRDeviceOrientation.m
 //
 //  Created by Ivan Raychev on 6.06.16 г..
 //
 //
 
-#import "IRRScreenOrientation.h"
+#import "IRRDeviceOrientation.h"
 
-@interface IRRScreenOrientation()
+@interface IRRDeviceOrientation()
 
 @property (strong, nonatomic) NSString *callbackId;
 
 @end
 
-@implementation IRRScreenOrientation
+@implementation IRRDeviceOrientation
 
 -(void)registerNotification:(CDVInvokedUrlCommand *)command
 {

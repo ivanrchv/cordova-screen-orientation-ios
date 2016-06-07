@@ -1,0 +1,1 @@
+## Device Orientation plugin for Cordova iOS
