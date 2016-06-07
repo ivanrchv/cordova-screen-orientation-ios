@@ -33,7 +33,9 @@ import android.util.Log;
 
 import android.view.View;
 import android.view.OrientationEventListener;
+import android.provider.Settings;
 import android.provider.Settings.System;
+import android.hardware.SensorManager;
 import org.apache.cordova.PluginResult;
 
 public class IRRDeviceOrientation extends CordovaPlugin {
