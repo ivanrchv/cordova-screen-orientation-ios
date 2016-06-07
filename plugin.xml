@@ -22,15 +22,11 @@
 
     <name>Device Orientation</name>
     <description>Adds Device object to iOS with listeners for device orientation change</description>
-    <license>MIT</license>
+    <license>Apache 2.0 License</license>
 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
-
-    <js-module src="www/deviceorientation.js" name="deviceorientation">
-        <clobbers target="cordova.plugins.deviceorientation.listener" />
-    </js-module>
 
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
@@ -39,7 +35,7 @@
             </feature>
         </config-file>
         <js-module src="www/deviceorientation.js" name="deviceorientation.ios">
-            <merges target="cordova.plugins.deviceorientation.listener" />
+            <merges target="cordova.plugins.deviceorientation" />
         </js-module>
         <header-file src="src/ios/IRRDeviceOrientation.h" />
         <source-file src="src/ios/IRRDeviceOrientation.m" />
