@@ -49,17 +49,11 @@ deviceOrientation.addEventListener = function (callback) {
     _dvcOrientation.listeners.push(callback);
 };
 
-deviceOrientation.removeEventListener = function (listenerToFilter) {
-    _dvcOrientation.listeners = _dvcOrientation.listeners.filter(function (listener) {
-        return listener !== listenerToFilter;
-    });
-
-    if (_dvcOrientation.listeners.length == 0) {
-        _dvcOrientation.deregisterWithIOS();
-    }
+deviceOrientation.removeEventListeners = function () {
+    _dvcOrientation.listeners = [];
+    _dvcOrientation.deregisterWithIOS();
 };
 
 
 
 module.exports = deviceOrientation;
-
